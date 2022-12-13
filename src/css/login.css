@@ -1,0 +1,54 @@
+.login{
+    background-color: rgba(201, 231, 252, 0.589);
+    padding:5px 0 10px 0 ;
+    text-align: center;
+    width:35%;
+    margin-left: 33%;
+    margin-top: 30px;
+    border-radius: 20px;
+    height:250px;
+    box-shadow: 6px 6px 6px rgb(194, 193, 193);
+}
+
+.login label{
+    font-size: 110%;
+}
+.login input[type='password']
+{
+    height:30px;
+    width:50%;
+    border-radius:5px;
+    padding-left: 10px;
+    font-size: 110%;
+    margin-bottom:10px;
+}
+.login input[type='email']
+{
+    height:30px;
+    width:50%;
+    border-radius:6px;
+    padding-left: 10px;
+    font-size: 110%;
+    margin-bottom:10px;
+}
+.login ::placeholder{
+
+    text-align: center;
+}
+
+.login input[type='submit']{
+    margin:20px;  
+    background-color: rgba(151, 165, 230, 0.815);
+    border:1px solid transparent;
+    border-radius:6px;
+    padding:8px 20px;
+    color:white;
+    font-size: 110%;
+    cursor:pointer;
+
+}
+.login span{
+    color:rgb(202, 100, 100);
+    font-weight: 450;
+}
+
