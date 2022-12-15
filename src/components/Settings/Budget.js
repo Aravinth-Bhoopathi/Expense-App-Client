@@ -2,8 +2,9 @@ import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import {startListBudget} from "../../actions/budgetAction"
-import { startUpdateBudget } from '../../actions/budgetAction'
+import swal from 'sweetalert'
+import {startListBudget, startUpdateBudget} from "../../actions/budgetAction"
+import { startListExpense } from '../../actions/expenseAction'
 
 const Budget = (props) => {
     const dispatch = useDispatch()
@@ -12,8 +13,17 @@ const Budget = (props) => {
         return state.budget
     })
 
+    const expense = useSelector((state) => {
+        return state.expense
+    })
+
+    const expenseAmount = expense.reduce((pv, cv) => {
+        return !cv.isDeleted ? pv + cv.amount : pv
+    }, 0)
+
     useEffect(() => {
         dispatch(startListBudget())
+        dispatch(startListExpense())
     }, [dispatch])
 
     const formik = useFormik({
@@ -25,7 +35,11 @@ const Budget = (props) => {
         }),
         onSubmit : function(values, {resetForm}){
             const data = {amount : Number(values.amount)}
-            dispatch(startUpdateBudget(data, resetForm))
+            if(data.amount >= expenseAmount){
+                dispatch(startUpdateBudget(data, resetForm))
+            } else {
+                swal({title : "Budget is less then Expense Amount", icon: "warning"})
+            }
         }
     })
 

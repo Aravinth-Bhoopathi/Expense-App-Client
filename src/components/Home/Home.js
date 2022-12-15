@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ExpenseForm from "./ExpenseForm"
-import ExpenseList from "./ExpenseList"
+import ExpenseTable from "./ExpenseTable"
 import {startListBudget} from "../../actions/budgetAction"
 import {startListExpense} from '../../actions/expenseAction'
 import { startListCategory } from "../../actions/categoryAction"
@@ -30,6 +30,18 @@ function Home(props){
         return state.expense
     })
 
+    const budget = useSelector((state) => {
+        return state.budget
+    })
+
+    const totalAmount = budget.amount 
+    
+    const totalExpense = expenseList.reduce((pv, cv) => {
+        return cv.isDeleted ? pv : pv + cv.amount
+    }, 0)
+    
+    const walletAmount = totalAmount - totalExpense
+    
     const expenseSearch = expenseList.filter((ele) => {
         if(table === 'all'){
             return (
@@ -84,7 +96,7 @@ function Home(props){
 
             <div className="row">
                 <div className="col-4">
-                    <button className="btn btn-success" onClick={handleClick}> ADD EXPENSE </button>
+                    <button className="btn btn-success" disabled={walletAmount <= 0} onClick={handleClick}> ADD EXPENSE </button>
                 </div>
                 <div className="col-3 ms-auto ">
                     <Input type='search' placeholder="search" disabled={table !== 'all'} value={search} onChange={handleSearch}/>
@@ -100,10 +112,10 @@ function Home(props){
             </div>
             <div>
                 <Modal title="Expense Form" open={isModalOpen} okButtonProps={{style:{display:'none'}}} onCancel={handleModalCancel}>
-                    <ExpenseForm action="Add" handleModalCancel={handleModalCancel} />
+                    <ExpenseForm action="Add" handleModalCancel={handleModalCancel} walletAmount={walletAmount} />
                 </Modal>
             </div>
-            <ExpenseList expenseSearch={expenseSearch}/>
+            <ExpenseTable expenseSearch={expenseSearch} totalAmount={totalAmount} totalExpense={totalExpense} />
         </div>
     )
 }

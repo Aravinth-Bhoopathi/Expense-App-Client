@@ -27,20 +27,20 @@ export const listBudget = (data) => {
 
 export const startUpdateBudget = (data, resetForm) => {
     return (dispatch) => {
-        axios.put('http://localhost:3030/api/budget/update', data, {
-            headers : {
-                "authorization" : localStorage.getItem('token')
-            }
-        })
-        .then((response) => {
-            const result = response.data
-            dispatch(updateBudget(result))
-            resetForm()
-        })
-        .catch((err) => {
-            alert(err)
-        })
-    }
+            axios.put('http://localhost:3030/api/budget/update', data, {
+                headers : {
+                    "authorization" : localStorage.getItem('token')
+                }
+            })
+            .then((response) => {
+                const result = response.data
+                dispatch(updateBudget(result))
+                resetForm()
+            })
+            .catch((err) => {
+                alert(err)
+            })
+        } 
 }
 
 export const updateBudget = (data) => {

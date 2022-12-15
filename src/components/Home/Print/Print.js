@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import {startListBudget} from "../../actions/budgetAction" 
-import { startListExpense } from "../../actions/expenseAction"
-import { startListCategory } from "../../actions/categoryAction"
-import { startGetUser } from '../../actions/userAction'
+import {startListBudget} from "../../../actions/budgetAction" 
+import { startListExpense } from "../../../actions/expenseAction"
+import { startListCategory } from "../../../actions/categoryAction"
+import { startGetUser } from '../../../actions/userAction'
 import Calculation from "./Calculation"
 import {Table} from 'antd'
 import { useReactToPrint } from 'react-to-print'
@@ -72,7 +72,7 @@ const Print = (props) => {
     const handlePrint = useReactToPrint({
         content : ()=> componentRef.current,
         documentTitle:'table',
-        onAfterPrint:()=> swal('success')
+        onAfterPrint:()=> swal({title:`Successfully`,icon:'success'})
     })
 
     return (

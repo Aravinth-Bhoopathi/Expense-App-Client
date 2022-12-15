@@ -6,7 +6,7 @@ import PrivateRoute from "./PrivateRoute"
 import UserProfile from "./User/UserProfile"
 import Setting from "./Settings/Setting"
 import Home from "./Home/Home"
-import Print from "./Home/Print"
+import Print from "./Home/Print/Print"
 
 const NavBar = (props) => {
     const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('token')))

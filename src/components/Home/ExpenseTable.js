@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {startUpdateExpense} from '../../actions/expenseAction'
 import { Table, Popconfirm, Form, Button, Input} from "antd";
+import swal from 'sweetalert';
 
-const ExpenseList = (props) => {
-    const {expenseSearch} = props
+const ExpenseTable = (props) => {
+    const {expenseSearch, totalExpense, totalAmount} = props
     const [editRow, setEditRow] = useState('')
     const [toggleEdit, setToggleEdit] = useState(false)
     const [categoryId, setCategoryId] = useState('')
+    const [expenseAmt, setExpenseAmt] = useState(0)
 
     const [form] = Form.useForm()
 
@@ -44,11 +46,16 @@ const ExpenseList = (props) => {
     const handleRestoreRow = (record) => {
         const id = record.key
         const action = 'restore'
-        dispatch(startUpdateExpense(id, action))
+        if(record.expenseAmount <= totalAmount - totalExpense){
+            dispatch(startUpdateExpense(id, action))
+        } else {
+            swal(`Rs. ${record.expenseAmount}`, {title : "Not enough Budget", icon : "warning"})
+        }
     }
 
     const handleEditRow = (record) => {
         setEditRow(record.key)
+        setExpenseAmt(record.expenseAmount)
         toggleSet()
         form.setFieldsValue({
             categoryName : record.categoryName,
@@ -75,7 +82,7 @@ const ExpenseList = (props) => {
                                 required: true,
                                 message:'please select category!'
                             }]}
-                        >
+                            >
                             <select onChange={handleCategory}>
                                 <option>select category</option>
                                 {category.map((ele) => {
@@ -204,27 +211,7 @@ const ExpenseList = (props) => {
                     </Popconfirm>
                 )
             }
-        },
-        // {
-        //     tilte: 'Action',
-        //     render: (_, record) => {
-        //         if(!record.isDeleted && deleteRow !== record.key){
-        //             return (
-        //                 <Popconfirm title="Sure to Delete?" onConfirm={() => handleDeleteRow(record)}>
-        //                      <Button disabled={record.isDeleted} type='primary' danger>Delete</Button>
-        //                 </Popconfirm>
-        //             )
-        //         } 
-        //         else if(record.isDeleted && deleteRow !== record.key) {
-        //             return (
-        //                 <Popconfirm title="Sure to Restore?" onConfirm={() => handleRestoreRow(record)}>
-        //                     <Button>Restore</Button>
-        //                 </Popconfirm>
-        //             )
-        //         }
-        //     }
-        // },
-        
+        }
     ]
 
     const onFinish = (values) => {
@@ -236,12 +223,16 @@ const ExpenseList = (props) => {
             expenseDate : values.expenseDate.split('-').reverse().join('-'),
             category : categoryId
         }
-        dispatch(startUpdateExpense(id, action , data))
+        if(totalAmount - totalExpense < data.amount - expenseAmt){
+            swal({title : "Not enough Budget", icon : "warning"})
+        }
+        else if(totalAmount - totalExpense >= data.amount - expenseAmt){
+            dispatch(startUpdateExpense(id, action , data))
+        } 
         toggleSet()
         setEditRow('')
         setCategoryId('')
     }
-
 
     return (
         <div>
@@ -256,4 +247,4 @@ const ExpenseList = (props) => {
     )
 }
 
-export default ExpenseList
+export default ExpenseTable

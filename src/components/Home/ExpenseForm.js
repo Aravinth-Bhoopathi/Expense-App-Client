@@ -8,7 +8,7 @@ import swal from "sweetalert"
 import '../../css/expense.css'
 
 const ExpenseForm = (props) => {
-    const {title, amount, expenseDate, action, _id, handleEditChange, handleModalCancel} = props
+    const {title, amount, expenseDate, action, _id, handleEditChange, handleModalCancel, walletAmount} = props
 
     const dispatch = useDispatch()
 
@@ -17,22 +17,6 @@ const ExpenseForm = (props) => {
             return !ele.isDeleted
         })
     })
-
-    const budget = useSelector((state) => {
-        return state.budget
-    })
-
-    const expenseAmount = useSelector((state) => {
-        return state.expense
-    })
-
-    let TotalAmount = budget.amount 
-
-    const TotalExpense = expenseAmount.reduce((pv, cv) => {
-        return cv.isDeleted ? pv : pv + cv.amount
-    }, 0)
-
-    const walletAmount = TotalAmount - TotalExpense
 
     useEffect(() => {
         dispatch(startListCategory())

@@ -7,11 +7,12 @@ import configureStore from './store/configureStore'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const store = configureStore()
-console.log('state', store.getState())
 
-store.subscribe(() => {
-  console.log('state', store.getState())
-})
+// console.log('state', store.getState())
+
+// store.subscribe(() => {
+//   console.log('state', store.getState())
+// })
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

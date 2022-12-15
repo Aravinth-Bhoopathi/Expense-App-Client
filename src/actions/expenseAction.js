@@ -58,7 +58,6 @@ export const startUpdateExpense = (id, action, data=null) => {
         })
         .then((response) => {
             const result = response.data 
-            console.log(result)
             dispatch(UpdateExpense(result))
         })
         .catch((err) => {

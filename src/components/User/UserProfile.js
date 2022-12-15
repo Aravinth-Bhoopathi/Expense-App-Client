@@ -26,7 +26,6 @@ const UserProfile = (props) => {
     }
 
     const handleClick=()=>{
-        console.log(image,'handleinage')
         const formdata = new FormData()
         formdata.append('image', image)
         dispatch(startUpdateProfile(formdata, toggle))
