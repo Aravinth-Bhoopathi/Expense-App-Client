@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## Questions App - Client
+## Expense Management App - Client
 
 - Expense Management App configure with the redux store and handle with React JS, Redux, Redux-Thunk.
 
@@ -25,6 +25,30 @@ You may also see any lint errors in the console.
 - Expenses can be added, updated, and deleted under different categories.
 - The expenses that have been deleted can be restored.
 - You can display data in charts and tables based on categories, and you can print them as well.
+
+## Installation
+
+Clone the repository
+
+```
+  git clone https://github.com/Aravinth-Bhoopathi/Expense-App-Client.git
+```
+
+Go to the project directory
+
+```
+  cd <--directory-name-->
+```
+
+Install the packages
+```
+  npm install <package-name>
+```
+
+Start the Server
+```
+  npm start
+```  
 
 ## Packages Installed
 
