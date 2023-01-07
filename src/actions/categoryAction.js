@@ -14,7 +14,7 @@ export const startCreateCategory = (data, resetForm) => {
             resetForm()
         })
         .catch((err) => {
-            swal(err)
+            swal(err.message)
         })
     }
 }
@@ -38,7 +38,7 @@ export const startListCategory = () => {
             dispatch(listCategory(result))
         })
         .catch((err) => {
-            swal(err)
+            swal(err.message)
         })
     }
 }
@@ -62,7 +62,7 @@ export const startUpdateCategory = (id, action, data=null) => {
             dispatch(updateCategory(result))
         })
         .catch((err) => {
-            alert(err)
+            swal(err.message)
         })
     }
 }

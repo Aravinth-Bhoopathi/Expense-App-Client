@@ -13,7 +13,7 @@ export const startListBudget = () => {
         dispatch(listBudget(result))
     })
     .catch((err) => {
-        swal(err)
+        swal(err.message)
     })
     }
 }
@@ -38,7 +38,7 @@ export const startUpdateBudget = (data, resetForm) => {
                 resetForm()
             })
             .catch((err) => {
-                alert(err)
+                swal(err.message)
             })
         } 
 }

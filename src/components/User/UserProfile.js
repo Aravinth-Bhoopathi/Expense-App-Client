@@ -36,7 +36,7 @@ const UserProfile = (props) => {
             {
                 Object.keys(user).length > 0 && (
                     <div><br/>
-                        <h2 className="text-info">User Profile</h2><br/>
+                        <h3 className="text-info">User Profile</h3><br/>
                         <p className='fw-semibold'>Name : {user.profile.name}</p>
                         <p className='fw-semibold'>Email : {user.email}</p>
                         <p className='fw-semibold'>Gender : {user.profile.gender}</p>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 
 export const startCreateExpense = (data, resetForm) => {
     return (dispatch) => {
@@ -13,7 +14,7 @@ export const startCreateExpense = (data, resetForm) => {
             resetForm()
         })
         .catch((err) => {
-            alert(err)
+            swal(err.message)
         })
     }
 }
@@ -37,7 +38,7 @@ export const startListExpense = () => {
             dispatch(ListExpense(result))
         })
         .catch((err) => {
-            alert(err)
+            swal(err.message)
         })
     }
 }
@@ -61,7 +62,7 @@ export const startUpdateExpense = (id, action, data=null) => {
             dispatch(UpdateExpense(result))
         })
         .catch((err) => {
-            alert(err)
+            swal(err.message)
         })
     }
 }
